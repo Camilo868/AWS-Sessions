@@ -1,0 +1,280 @@
+Coder@rwadmin-90533010005:~$ aws sts get-caller-identity
+{
+    "UserId": "*********************",
+    "Account": "847547470714",
+    "Arn": "arn:aws:iam::847547470714:user/admin-camilo"
+}
+Coder@rwadmin-90533010005:~$ aws iam create-user --user-name <Jose>
+bash: error de sintaxis cerca del elemento inesperado `newline'
+Coder@rwadmin-90533010005:~$ aws iam create-user --user-name <jose>
+bash: error de sintaxis cerca del elemento inesperado `newline'
+Coder@rwadmin-90533010005:~$ aws sts get-caller-identity
+{
+    "UserId": "*********************",
+    "Account": "847547470714",
+    "Arn": "arn:aws:iam::847547470714:user/admin-camilo"
+}
+Coder@rwadmin-90533010005:~$ aws iam create-user --user-name jose
+{
+    "User": {
+        "Path": "/",
+        "UserName": "jose",
+        "UserId": "*********************",
+        "Arn": "arn:aws:iam::847547470714:user/jose",
+        "CreateDate": "2026-11-25T20:10:57+00:00"
+    }
+}
+Coder@rwadmin-90533010005:~$ aws iam list-users
+{
+    "Users": [
+        {
+            "Path": "/",
+            "UserName": "admin-camilo",
+            "UserId": "*********************",
+            "Arn": "arn:aws:iam::847547470714:user/admin-camilo",
+            "CreateDate": "2026-11-20T00:08:11+00:00"
+        },
+        {
+            "Path": "/",
+            "UserName": "jose",
+            "UserId": "*********************",
+            "Arn": "arn:aws:iam::847547470714:user/jose",
+            "CreateDate": "2026-11-25T20:10:57+00:00"
+        }
+    ]
+}
+Coder@rwadmin-90533010005:~$ aws iam list-users --query "Users[].UserName" table
+ 
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+
+
+aws: [ERROR]: Unknown options: table
+Coder@rwadmin-90533010005:~$ aws iam list-users --query "Users[].UserName" --output table
+------------------
+|    ListUsers   |
++----------------+
+|  admin-camilo  |
+|  jose          |
++----------------+
+Coder@rwadmin-90533010005:~$ aws iam get-user --user-name jose
+{
+    "User": {
+        "Path": "/",
+        "UserName": "jose",
+        "UserId": "*********************",
+        "Arn": "arn:aws:iam::847547470714:user/jose",
+        "CreateDate": "2026-11-25T20:10:57+00:00"
+    }
+}
+Coder@rwadmin-90533010005:~$ aws iam get-user --user-name camilo
+
+aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetUser operation: The user with name camilo cannot be found.
+Coder@rwadmin-90533010005:~$ aws iam get-user --user-name admin-camilo
+{
+    "User": {
+        "Path": "/",
+        "UserName": "admin-camilo",
+        "UserId": "*********************",
+        "Arn": "arn:aws:iam::847547470714:user/admin-camilo",
+        "CreateDate": "2026-11-20T00:08:11+00:00",
+        "Tags": [
+            {
+                "Key": "*********************",
+                "Value": "riwi-coders"
+            }
+        ]
+    }
+}
+Coder@rwadmin-90533010005:~$ D
+Coder@rwadmin-90533010005:~$ aws iam get-user --user-name jose
+{
+    "User": {
+        "Path": "/",
+        "UserName": "jose",
+        "UserId": "*********************",
+        "Arn": "arn:aws:iam::847547470714:user/jose",
+        "CreateDate": "2026-11-25T20:10:57+00:00"
+    }
+}
+"arn:aws:iam::847547470714:user/jose
+
+Coder@rwadmin-90533010005:~$ aws iam tag-user --user.name dev-jose --tags key=area,Value=desarrollo
+
+aws: [ERROR]: An error occurred (ParamValidation): the following arguments are required: --user-name
+
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+
+Coder@rwadmin-90533010005:~$ aws iam tag-user --user.name jose --tags key=area,Value=desarrollo
+
+aws: [ERROR]: An error occurred (ParamValidation): the following arguments are required: --user-name
+
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+
+Coder@rwadmin-90533010005:~$ aws iam get-user --user-name jose
+{
+    "User": {
+        "Path": "/",
+        "UserName": "jose",
+        "UserId": "***************",
+        "Arn": "arn:aws:iam::847547470714:user/jose",
+        "CreateDate": "2026-11-25T20:10:57+00:00"
+    }
+}
+Coder@rwadmin-90533010005:~$ aws iam tag-user --user-name jose --tags Key=area,Value=desarrollo
+Coder@rwadmin-90533010005:~$ aws iam list-user-tags --user-name jose
+{
+    "Tags": [
+        {
+            "Key": "area",
+            "Value": "desarrollo"
+        }
+    ]
+}
+Coder@rwadmin-90533010005:~$ aws iam update-user --user-name jose --new-user-name lector-jose
+Coder@rwadmin-90533010005:~$ aws iam list-users
+{
+    "Users": [
+        {
+            "Path": "/",
+            "UserName": "admin-camilo",
+            "UserId": "***************",
+            "Arn": "arn:aws:iam::847547470714:user/admin-camilo",
+            "CreateDate": "2026-11-20T00:08:11+00:00"
+        },
+        {
+            "Path": "/",
+            "UserName": "lector-jose",
+            "UserId": "***************",
+            "Arn": "arn:aws:iam::847547470714:user/lector-jose",
+            "CreateDate": "2026-11-25T20:10:57+00:00"
+        }
+    ]
+}
+
+oder@rwadmin-90533010005:~$ aws iam get-user --user-name lector-jose
+{
+    "User": {
+        "Path": "/",
+        "UserName": "lector-jose",
+        "UserId": "**************",
+        "Arn": "arn:aws:iam::847547470714:user/lector-jose",
+        "CreateDate": "2026-11-25T20:10:57+00:00",
+        "Tags": [
+            {
+                "Key": "area",
+                "Value": "desarrollo"
+            }
+        ]
+    }
+}
+Coder@rwadmin-90533010005:~$ aws iam attach-user-policy --user-name lector-jose --policy-arn arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
+Coder@rwadmin-90533010005:~$ aws iam list-attached-user-policies --user-name lector-jose
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "AmazonEC2ReadOnlyAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
+        }
+    ]
+}
+Coder@rwadmin-90533010005:~$ aws iam create-acces-key --user-name lector-jose
+
+aws: [ERROR]: An error occurred (ParamValidation): argument operation: Found invalid choice 'create-acces-key'
+
+Maybe you meant:
+
+  * create-access-key
+
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+
+Coder@rwadmin-90533010005:~$ aws iam create-access-key --user-name lector-jose
+{
+    "AccessKey": {
+        "UserName": "lector-jose",
+        "AccessKeyId": "***************",
+        "Status": "Active",
+        "SecretAccessKey": "***************",
+        "CreateDate": "2026-11-25T22:51:59+00:00"
+    }
+}
+Coder@rwadmin-90533010005:~$ aws ec2 describe-instances --profile lector
+{
+    "Reservations": []
+}
+Coder@rwadmin-90533010005:~$ aws iam list-users --profile lector
+
+aws: [ERROR]: An error occurred (AccessDenied) when calling the ListUsers operation: User: arn:aws:iam::847547470714:user/lector-jose is not authorized to perform: iam:ListUsers on resource: arn:aws:iam::847547470714:user/ because no identity-based policy allows the iam:ListUsers action. Go to https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/authorization-details/9aur53ymq2co2erdmnjsdh0m1 for complete details, or call the GetRequestAuthorizationDetails API with the following authorization id: 9aur53ymq2co2erdmnjsdh0m1
+Coder@rwadmin-90533010005:~$ 
+
+Coder@rwadmin-90533010005:~$ aws iam detach-user-policy --user-name lector-jose --policy-arn arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
+Coder@rwadmin-90533010005:~$ aws iam list-attached-user-policies --user-name lector-jose
+{
+    "AttachedPolicies": []
+}
+Coder@rwadmin-90533010005:~$ aws ec2 describe-instances --profile lector
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the DescribeInstances operation: You are not authorized to perform this operation. User: arn:aws:iam::847547470714:user/lector-jose is not authorized to perform: ec2:DescribeInstances because no identity-based policy allows the ec2:DescribeInstances action
+Coder@rwadmin-90533010005:~$ 
+aws iam detach-user-policy --user-name lector-jose --policy-arn arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
+Coder@rwadmin-90533010005:~$ aws iam list-attached-user-policies --user-name lector-jose
+{
+    "AttachedPolicies": []
+}
+Coder@rwadmin-90533010005:~$ aws ec2 describe-instances --profile lector
+
+aws: [ERROR]: An error occurred (UnauthorizedOperation) when calling the DescribeInstances operation: You are not authorized to perform this operation. User: arn:aws:iam::847547470714:user/lector-jose is not authorized to perform: ec2:DescribeInstances because no identity-based policy allows the ec2:DescribeInstances action
+Coder@rwadmin-90533010005:~$ aws iam list-access-keys --user-name lector-jose
+{
+    "AccessKeyMetadata": [
+        {
+            "UserName": "lector-jose",
+            "AccessKeyId": "**************",
+            "Status": "Active",
+            "CreateDate": "2026-11-25T22:51:59+00:00"
+        }
+    ]
+}
+Coder@rwadmin-90533010005:~$ aws iam delete-access-key --user-name lector-jose --access-key-id AKIA4KVOECN5FVA4KF6L
+Coder@rwadmin-90533010005:~$ aws iam list-attached-user-policies --user-name lector-jose
+{
+    "AttachedPolicies": []
+}
+Coder@rwadmin-90533010005:~$ aws iam delete-user --user-name lector-jose
+Coder@rwadmin-90533010005:~$ aws iam list-users --query "Users[].UserName" --output table
+------------------
+|    ListUsers   |
++----------------+
+|  admin-camilo  |
++----------------+
+Coder@rwadmin-90533010005:~$  aws iam list-access-keys --user-name lector-jose
+{                            aws iam list-users --query "Users[].UserName" --output tablessKeyMetadata": [    aws iam list-access-keys --user-name lector-jose
+{                            aws iam list-users --query "Users[].UserName" --output tablessKeyMetadata": [   cat ~/.aws/config
+[default]
+region = us-east-2
+output = json
+[profile lector]
+region = us-east-2
+output = json
+Coder@rwadmin-90533010005:~$ grep "\[" ~/.aws/credentials
+[default]
+[lector]
